@@ -8,6 +8,13 @@ app.get('/', (request, response) => {
     response.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+app.get('/alexa', (request, response) => {
+    console.log(request.url);
+    response.sendFile(path.join(__dirname, 'public', 'alexa.html'));
+});
+
+app.use('/api', require('./api'));
+
 app.use((error, request, response, next) => {
     console.error(error.stack);
     response.status(500).send('B0rken');
