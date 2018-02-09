@@ -8,14 +8,27 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="meetme.css">
-    <style>
-      div.card-group { margin-top: 0.3rem;}
-      div.card {margin-right: 0.2rem;}
-    </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#">MeetMe</a>
+      <a class="navbar-brand" href="/meetme/">MeetMe</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/meetme/">Caregiver dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/meetme/alexa">Assistant</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/meetme/api">API</a>
+          </li>
+        </ul>
+      </div>
     </nav>
 
     <main class="container">
@@ -83,14 +96,14 @@
             <div class="card">
             <div class="card-header">Blood pressure</div>
               <div class="card-body">
-                <p class="card-text"></p>
+                <p class="card-text text-center text-white bg-success">140/82 <small>mmHg</small></p>
               </div>
             </div>
 
             <div class="card">
               <div class="card-header">Blood glucose</div>
               <div class="card-body">
-                <p class="card-text"></p>
+                <p class="card-text text-center text-white bg-success">6.7 <small>mmol/l</small></p>
               </div>
             </div>
 
@@ -105,7 +118,7 @@
             <div class="card">
               <div class="card-header">Sleep</div>
               <div class="card-body">
-                <p class="card-text"></p>
+                <p class="card-text text-center text-white bg-warning">5h 30 min, fair</p>
               </div>
             </div>      
           </div>
