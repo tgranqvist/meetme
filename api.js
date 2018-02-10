@@ -9,13 +9,28 @@ api.get('/', (request, response) => {
     response.sendFile(path.join(__dirname, 'public', 'api.html'));
 });
 
-api.post('/metrics', (request, response) => {
-    console.log(`metric api called with json.stringify(${request.body})`);
+api.post('/cardiac', (request, response) => {
+    console.log(`Cardiac endpoint called with ${JSON.stringify(request.body)}`);
+    response.send(request.body);
+});
+
+api.post('/bgluc', (request, response) => {
+    console.log(`Blood gluose endpoint called with ${JSON.stringify(request.body)}`);
+    response.send(request.body);
+});
+
+api.post('/spo2', (request, response) => {
+    console.log(`Oxygen saturation endpoint called with ${JSON.stringify(request.body)}`);
+    response.send(request.body);
+});
+
+api.post('/sleep', (request, response) => {
+    console.log(`Sleep endpoint called with json.stringify(${request.body})`);
     response.send(request.body);
 });
 
 api.post('/social', (request, response) => {
-    console.log(`social api called with json.stringify(${request.body})`);
+    console.log(`social api called with ${JSON.stringify(request.body)}`);
     response.send(request.body);    
 });
 
