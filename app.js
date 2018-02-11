@@ -1,7 +1,22 @@
-const path = require('path');
-const app = require('express')();
+const path = require('path'),
+    app = require('express')(),
+    ws = require('express-ws')(app);
 
 const PORT = process.env.PORT || 8300;
+
+// Dependency injection  middleware. Makes utility objects available
+// to all route handlers.
+app.use((request, response, next) => {
+    request.updates = ws.getWss('updates');
+    next();
+});
+
+app.ws('/updates', (socket, request) => {
+    socket.on('message', message => {
+        console.log(message);
+        socket.send(message);
+    });
+});
 
 app.get('/', (request, response) => {
     console.log(request.url);

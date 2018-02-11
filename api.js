@@ -1,6 +1,6 @@
 const path = require('path'),
     bodyParser = require('body-parser'),
-    api = require('express')();
+    api = require('express').Router();
 
 api.use(bodyParser.json());
 
@@ -12,6 +12,9 @@ api.get('/', (request, response) => {
 api.post('/cardiac', (request, response) => {
     console.log(`Cardiac endpoint called with ${JSON.stringify(request.body)}`);
     response.send(request.body);
+    request.updates.clients.forEach(client => {
+        client.send(JSON.stringify(request.body));
+    });
 });
 
 api.post('/bgluc', (request, response) => {
@@ -25,7 +28,7 @@ api.post('/spo2', (request, response) => {
 });
 
 api.post('/sleep', (request, response) => {
-    console.log(`Sleep endpoint called with json.stringify(${request.body})`);
+    console.log(`Sleep endpoint called with ${JSON.stringify(request.body)}`);
     response.send(request.body);
 });
 
