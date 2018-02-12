@@ -1,3 +1,5 @@
+require('dotenv').load();
+
 const path = require('path'),
     app = require('express')(),
     ws = require('express-ws')(app);
