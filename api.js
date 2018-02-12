@@ -1,6 +1,18 @@
 const path = require('path'),
-    bodyParser = require('body-parser'),
-    api = require('express').Router();
+    requests = require('request'),
+    bodyParser = require('body-parser'),    
+    api = require('express').Router(),
+    callRequest = {
+        uri: `https://api.twilio.com/2010-04-01/Accounts/${process.env.SID}/Calls`,
+        auth: {'user': process.env.SID, 'pass': process.env.TOKEN},
+        formData: {
+	    Url: 'https://tkjg.fi/meetme/call.xml',
+            From: process.env['Twilio.From'],
+            To: '',
+	    Method: 'GET'
+        }
+    };
+
 
 api.use(bodyParser.json());
 
@@ -38,16 +50,26 @@ api.post('/spo2', (request, response) => {
 
 api.post('/sleep', (request, response) => {
     console.log(`Sleep endpoint called with ${JSON.stringify(request.body)}`);
-    response.send(request.body);
-    const data = { "type": "sleep", payload: request.body };
-    request.updates.clients.forEach(client => {
+    res.send(req.body);
+    const data = { "type": "sleep", payload: req.body };
+    reqquest.updates.clients.forEach(client => {
         client.send(JSON.stringify(data));
     });
 });
 
-api.post('/social', (request, response) => {
+api.post('/social/calls', (request, response) => {
     console.log(`social api called with ${JSON.stringify(request.body)}`);
-    response.send(request.body);    
+    response.send(request.body);
+    const recipient = process.env[`Recipients.${request.body.to}`];
+    callRequest.formData.To = recipient;
+    console.log(callRequest);
+    requests.post(callRequest, (error, response, body) => {
+        if (!error && response.statusCode == 201) {
+            console.log('Call placed!');
+        } else {
+            console.log(`Something borked: ${error}`);
+        }
+    });
 });
 
 module.exports = api;
